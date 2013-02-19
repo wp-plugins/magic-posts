@@ -13,6 +13,8 @@ Create Custom Post Types and Custom Fields with scaffolds.
 
 Create Custom Post Types and Custom Fields with scaffolds.
 
+See: https://github.com/gbaptista/magic-posts#readme
+
 * Custom Post Types
 * All WordPress Default Posts
 * All WordPress Default Pages
@@ -24,8 +26,6 @@ Create Custom Post Types and Custom Fields with scaffolds.
 * Custom Wordpress Mini-Editor (teeny).
 * Unique image from Media Library.
 * Multiple images from Media Library.
-
-See: https://github.com/gbaptista/magic-posts#readme
 
 == Installation ==
 
