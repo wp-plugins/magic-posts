@@ -110,34 +110,39 @@ if(!class_exists('Magic_Posts')) {
 
   }
 
-  // Admin
-  if(function_exists('is_admin') && is_admin())
-  {
-
-    require_once('magic-posts/settings.php');
-    require_once('magic-posts/images.php');
-    require_once('magic-posts/scaffolds.php');
-    require_once('magic-posts/custom-posts.php');
-    require_once('magic-posts/meta-boxes.php');
-
-    Magic_Posts::instance()->admin();
-
-  }
-
-  // Site
-  elseif(function_exists('is_admin'))
+  // Plugin
+  if(function_exists('is_admin'))
   {
 
     require_once('magic-posts/images.php');
     require_once('magic-posts/scaffolds.php');
+    require_once('magic-posts/inflector/magic_posts_inflector.php');
     require_once('magic-posts/custom-posts.php');
-    require_once('magic-posts/retrieve-meta.php');
 
-    function magic_posts($key, $force_id=NULL) {
-      return Magic_Posts::instance()->retrieve_meta($key, $force_id);
+    // Admin
+    if(is_admin())
+    {
+
+      require_once('magic-posts/settings.php');
+      require_once('magic-posts/meta-boxes.php');
+
+      Magic_Posts::instance()->admin();
+
     }
 
-    Magic_Posts::instance()->site();
+    // Site
+    else
+    {
+
+      require_once('magic-posts/retrieve-meta.php');
+
+      function magic_posts($key, $force_id=NULL) {
+        return Magic_Posts::instance()->retrieve_meta($key, $force_id);
+      }
+
+      Magic_Posts::instance()->site();
+
+    }
 
   }
 
