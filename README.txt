@@ -13,6 +13,8 @@ Create Custom Post Types and Custom Fields with scaffolds.
 
 Create Custom Post Types and Custom Fields with scaffolds.
 
+See: https://github.com/gbaptista/magic-posts#readme
+
 * Custom Post Types
 * All WordPress Default Posts
 * All WordPress Default Pages
@@ -24,8 +26,6 @@ Create Custom Post Types and Custom Fields with scaffolds.
 * Custom Wordpress Mini-Editor (teeny).
 * Unique image from Media Library.
 * Multiple images from Media Library.
-
-See: https://github.com/gbaptista/magic-posts#readme
 
 == Installation ==
 
@@ -40,19 +40,19 @@ Install Magic Posts either via the WordPress.org plugin directory, or by uploadi
 
 == Changelog ==
 
-= 0.0.2 =
-* Scaffold support for WordPress Default Posts
-* Scaffold support for WordPress Default Pages
-* Scaffold support for WordPress Default Pages ID or Post ID
-
-= 0.0.3 =
-* New magic_posts() metadata retriever.
+= 0.0.5 =
+* Inflection support.
 
 = 0.0.4 =
 * Retrieve WordPress media with new Magic_Posts_Image class.
 
-= 0.0.5 =
-* Inflection support.
+= 0.0.3 =
+* New magic_posts() metadata retriever.
+
+= 0.0.2 =
+* Scaffold support for WordPress Default Posts
+* Scaffold support for WordPress Default Pages
+* Scaffold support for WordPress Default Pages ID or Post ID
 
 == Upgrade Notice ==
 
