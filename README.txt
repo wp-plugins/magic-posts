@@ -1,0 +1,72 @@
+=== Magic Posts ===
+Contributors: gbaptistas
+Tags: custom posts, custom fields, custom taxonomies, scaffold, scaffolding, images, gallery
+Requires at least: 3.0.1
+Tested up to: 3.4
+Stable tag: 0.0.5
+License: MIT
+License URI: http://opensource.org/licenses/MIT
+
+Create Custom Post Types and Custom Fields with scaffolds.
+
+== Description ==
+
+Create Custom Post Types and Custom Fields with scaffolds.
+
+* Custom Post Types
+* All WordPress Default Posts
+* All WordPress Default Pages
+* Post ID, Page ID or Custom Post Type ID
+
+* Text field.
+* Textarea field.
+* Custom Wordpress Editor.
+* Custom Wordpress Mini-Editor (teeny).
+* Unique image from Media Library.
+* Multiple images from Media Library.
+
+See: https://github.com/gbaptista/magic-posts#readme
+
+== Installation ==
+
+Install Magic Posts either via the WordPress.org plugin directory, or by uploading the files to your server.
+
+== Screenshots ==
+
+1. Image and Gallery
+2. Scaffolds
+3. Products
+4. Articles
+
+== Changelog ==
+
+= 0.0.2 =
+* Scaffold support for WordPress Default Posts
+* Scaffold support for WordPress Default Pages
+* Scaffold support for WordPress Default Pages ID or Post ID
+
+= 0.0.3 =
+* New magic_posts() metadata retriever.
+
+= 0.0.4 =
+* Retrieve WordPress media with new Magic_Posts_Image class.
+
+= 0.0.5 =
+* Inflection support.
+
+== Upgrade Notice ==
+
+= 0.0.2 =
+* Scaffold support for WordPress Default Posts
+* Scaffold support for WordPress Default Pages
+* Scaffold support for WordPress Default Pages ID or Post ID
+
+= 0.0.3 =
+* WARNING: Upgrade from 0.0.1 or 0.0.2 will cause loss of all Magic Posts metadata.
+* New magic_posts() metadata retriever.
+
+= 0.0.4 =
+* Retrieve WordPress media with new Magic_Posts_Image class.
+
+= 0.0.5 =
+* Inflection support.
