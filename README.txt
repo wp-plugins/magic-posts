@@ -36,6 +36,4 @@ See: https://github.com/gbaptista/magic-posts
 == Upgrade Notice ==
 
 = 0.0.2 =
-* Scaffold support for WordPress Default Posts
-* Scaffold support for WordPress Default Pages
-* Scaffold support for WordPress Default Pages ID or Post ID
+Support Default Posts/Pages and ID.
