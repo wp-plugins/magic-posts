@@ -61,16 +61,13 @@ Install Magic Posts either via the WordPress.org plugin directory, or by uploadi
 == Upgrade Notice ==
 
 = 0.0.2 =
-* Scaffold support for WordPress Default Posts
-* Scaffold support for WordPress Default Pages
-* Scaffold support for WordPress Default Pages ID or Post ID
+Support Default Posts/Pages and ID.
 
 = 0.0.3 =
-* WARNING: Upgrade from 0.0.1 or 0.0.2 will cause loss of all Magic Posts metadata.
-* New magic_posts() metadata retriever.
+New magic_posts() metadata retriever.
 
 = 0.0.4 =
-* Retrieve WordPress media with new Magic_Posts_Image class.
+Retrieve media with new Magic_Posts_Image class.
 
 = 0.0.5 =
-* Inflection support.
+Inflection support.
