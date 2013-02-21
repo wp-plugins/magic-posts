@@ -2,7 +2,8 @@
 
 Magic_Posts::instance()->inject(
 
-  'migrate_post_type', function($from, $to) {
+  'migrate_post_type', function($from, $to)
+  {
 
     global $wpdb;
 
@@ -20,44 +21,48 @@ Magic_Posts::instance()->inject(
 
 Magic_Posts::instance()->inject(
 
-  'migrate_field', function($post_type, $from, $to) {
+  'migrate_field', function($post_type, $from, $to)
+  {
 
     global $wpdb;
 
-    if(preg_match('/^\[[0-9]{1,}\]$/', $post_type))
-    {
+    if(preg_match('/^\[[0-9]{1,}\]$/', $post_type)) {
+
       $posts = $wpdb->get_results($wpdb->prepare(
         "SELECT ID FROM $wpdb->posts WHERE ID = %d",
         Magic_Posts::instance()->trim_chars($post_type, '[', ']')
       ));
-    }
-    elseif($post_type == '[post]' || $post_type == '[page]')
-    {
+
+    } elseif($post_type == '[post]' || $post_type == '[page]') {
+
       $posts = $wpdb->get_results($wpdb->prepare(
         "SELECT ID FROM $wpdb->posts WHERE post_type = %s",
         Magic_Posts::instance()->trim_chars($post_type, '[', ']')
       ));
-    }
-    else
-    {
+
+    } else {
+
       $posts = $wpdb->get_results($wpdb->prepare(
         "SELECT ID FROM $wpdb->posts WHERE post_type = %s",
         Magic_Posts::instance()->post_type($post_type)
       ));
+
     }
 
     foreach($posts as $post) {
+
       $wpdb->query(
         $teste = $wpdb->prepare("
           UPDATE $wpdb->postmeta
           SET meta_key = REPLACE(meta_key, %s, %s)
           WHERE meta_key LIKE %s
           ",
-          '_m-p' . Magic_Posts::instance()->field($from),
-          '_m-p' . Magic_Posts::instance()->field($to),
-          '_m-p' . Magic_Posts::instance()->field($from) . '%'
+          Magic_Posts::instance()->field($from),
+          Magic_Posts::instance()->field($to),
+          Magic_Posts::instance()->field($from) . '%'
         )
       );
+
     }
 
   }
@@ -66,7 +71,27 @@ Magic_Posts::instance()->inject(
 
 Magic_Posts::instance()->inject(
 
-  'migration', function($migration) {
+  'migrations', function($migrations_texts)
+  {
+
+    if(empty($migrations_texts)) return FALSE;
+
+    $migrations_texts = explode("\n", $migrations_texts);
+
+    foreach($migrations_texts as $migrations_text) {
+      Magic_Posts::instance()->migrate(Magic_Posts::instance()->migration($migrations_text));
+    }
+
+    return TRUE;
+
+  }
+
+);
+
+Magic_Posts::instance()->inject(
+
+  'migration', function($migration)
+  {
 
     $migration = trim($migration);
 
@@ -75,21 +100,22 @@ Magic_Posts::instance()->inject(
     // Post Types
     if(
       preg_match('/^\[.*\]$/', $migration)
-      &&
-      !preg_match('/^\[[0-9]{1,}\]|^\[\w{1,}\]/', $migration)
-    )
-    {
-      
+      && !preg_match('/^\[[0-9]{1,}\]|^\[\w{1,}\]/', $migration)
+    ) {
+
       $migration = Magic_Posts::instance()->trim_chars($migration, '[', ']');
       $post_types = array();
+
       foreach(explode(',', $migration) as $post_type) {
+
         $post_type = explode('=>', $post_type);
         $post_types[] = array(
           'from'  => Magic_Posts::instance()->trim_quotes($post_type[0]),
           'to'    => Magic_Posts::instance()->trim_quotes($post_type[1]),
         );
+
       }
-      
+
       return $post_types;
 
     // Deeper...
@@ -97,14 +123,15 @@ Magic_Posts::instance()->inject(
 
       $tmp_migration = $migration;
 
-      if(preg_match_all('/\[.*?\]/', $tmp_migration, $replaces))
-      {
+      if(preg_match_all('/\[.*?\]/', $tmp_migration, $replaces)) {
+
         foreach ($replaces as $replace_match) {
           foreach ($replace_match as $replace) {
             if(!preg_match('/^\[[0-9]{1,}\]|^\[\w{1,}\]/', $replace))
               $tmp_migration = str_replace($replace, preg_replace('/\s{1,}/', '', $replace), $tmp_migration);
           }
         }
+
       }
 
       preg_match('/\'.*\'\s|\".*\"\s/', $tmp_migration, $title);
@@ -122,16 +149,12 @@ Magic_Posts::instance()->inject(
       $migration = trim($migration);
 
       // Post Type
-      if(!preg_match('/^\[|\]$/', $migration))
-      {
+      if(!preg_match('/^\[|\]$/', $migration)) {
 
         return array(array('from' => $title, 'to' => Magic_Posts::instance()->trim_quotes(str_replace('=>', '', $migration))));
 
-      }
-
       // Fields
-      else
-      {
+      } else {
 
         $migration = preg_replace('/^\[|\]$/', '', $migration);
 
@@ -157,36 +180,25 @@ Magic_Posts::instance()->inject(
 
 Magic_Posts::instance()->inject(
 
-  'migrations', function($migrations_texts) {
-    
-    if(empty($migrations_texts)) return FALSE;
+  'migrate', function($migration)
+  {
 
-    $migrations_texts = explode("\n", $migrations_texts);
+    if(!function_exists('is_admin')) return NULL;
 
-    foreach($migrations_texts as $migrations_text) {
-      Magic_Posts::instance()->migrate(Magic_Posts::instance()->migration($migrations_text));
-    }
+    if($migration) {
 
-    return TRUE;
+      if(isset($migration['fields'])) {
 
-  }
-
-);
-
-Magic_Posts::instance()->inject(
-
-  'migrate', function($migration) {
-
-    if($migration)
-    {
-      if(isset($migration['fields']))
-      {
         foreach ($migration['fields'] as $field)
           Magic_Posts::instance()->migrate_field($migration['post_type'], $field['from'], $field['to']);
+
       } else {
+
         foreach ($migration as $post_type)
           Magic_Posts::instance()->migrate_post_type($post_type['from'], $post_type['to']);
+
       }
+
     }
 
   }
