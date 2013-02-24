@@ -45,8 +45,8 @@ Install Magic Posts either via the WordPress.org plugin directory, or by uploadi
 == Changelog ==
 
 = 0.0.8 =
-* Image and Gallery performance improvement.
-* Windows Compatibility
+* Image/Gallery performance improvement.
+* Windows compatibility.
 
 = 0.0.7 =
 Bug fixes.
@@ -91,4 +91,4 @@ Fix Windows bugs and Migrations support.
 Bug fixes.
 
 = 0.0.8 =
-Image and Gallery performance improvement.
+Windows compatibility and Image/Gallery performance improvement.
